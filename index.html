@@ -1,0 +1,512 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Alzeara Majestic Cargo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap">
+<style>
+/* Layout: header putih tipis, hero teks + foto maskot, strip fakta, katalog armada 4 kolom dengan "plat spesifikasi" seperti kartu asli AMC, alur layanan bernomor (urutan nyata), form sewa yang membuka WhatsApp. Warna dari company profile: slate dan biru royal. */
+:root {
+  --bg: #F4F6FA;
+  --surface: #FFFFFF;
+  --fg: #111A2C;
+  --muted: #55627A;
+  --line: #D8DFEA;
+  --slate: #536884;
+  --blue: #1E4AA8;
+  --blue-fg: #FFFFFF;
+  --tint: #E3EAF6;
+  --photo-bg: #FFFFFF;
+  --wa: #12843F;
+  --wa-fg: #FFFFFF;
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B111C; --surface: #131B2B; --fg: #E8EDF6; --muted: #9AA7BD; --line: #263249;
+    --slate: #8FA3C2; --blue: #7AA2F0; --blue-fg: #0A1224; --tint: #1A2540;
+    --wa: #2FBF67; --wa-fg: #06210F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B111C; --surface: #131B2B; --fg: #E8EDF6; --muted: #9AA7BD; --line: #263249;
+  --slate: #8FA3C2; --blue: #7AA2F0; --blue-fg: #0A1224; --tint: #1A2540;
+  --wa: #2FBF67; --wa-fg: #06210F; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-inline: 16px; padding-block: 0 40px;
+}
+.wrap { max-width: 1120px; margin-inline: auto; min-width: 0; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+.mono { flex: none; width: 38px; height: 38px; border-radius: 8px; background: var(--blue); color: var(--blue-fg); display: grid; place-items: center; font: 700 0.8rem var(--font-display); letter-spacing: 0.02em; }
+.brand b { font: 600 1rem var(--font-display); line-height: 1.15; display: block; }
+.brand small { color: var(--muted); font-size: 0.74rem; display: block; }
+.nav { display: flex; align-items: center; gap: 22px; font-size: 0.93rem; }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--fg); }
+.nav .btn { color: var(--blue-fg); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 22px; border-radius: 8px; font: 700 0.95rem var(--font-body); text-decoration: none; border: 1px solid transparent; cursor: pointer; text-align: center; }
+.btn-primary { background: var(--blue); color: var(--blue-fg); }
+.btn-ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn-wa { background: var(--wa); color: var(--wa-fg); width: 100%; }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 0.88rem; }
+.btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 40px; padding-block: 48px 36px; align-items: center; }
+.eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+.hero h1 { font-size: clamp(2rem, 4.8vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; }
+.hero h1 span { color: var(--slate); }
+.hero .lead { margin-top: 18px; color: var(--muted); max-width: 50ch; font-size: 1.05rem; }
+.cta-row { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+.hero-photo { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.facts div { padding: 16px 20px; border-right: 1px solid var(--line); min-width: 0; }
+.facts div:last-child { border-right: 0; }
+.facts b { display: block; font: 600 1.25rem var(--font-display); }
+.facts span { color: var(--muted); font-size: 0.85rem; }
+
+/* Sections */
+section { padding-block: 56px 8px; }
+.sec-head { margin-bottom: 26px; display: grid; gap: 8px; }
+.sec-head h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); letter-spacing: -0.015em; }
+.sec-head p { color: var(--muted); max-width: 60ch; }
+
+.about { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: start; }
+.about p { color: var(--muted); }
+.about p + p { margin-top: 14px; }
+.vm { margin-top: 24px; display: grid; gap: 12px; }
+.vm div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+.vm h3 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; font-family: var(--font-body); font-weight: 700; }
+.vm p { font-size: 0.95rem; }
+.about figure { margin: 0; }
+.about figure img { border-radius: 14px; border: 1px solid var(--line); }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.pills span { border: 1.5px solid var(--slate); color: var(--slate); border-radius: 999px; padding: 6px 16px; font-weight: 500; font-size: 0.92rem; }
+
+/* Armada */
+.fleet { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.unit { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.unit .ph { background: var(--photo-bg); aspect-ratio: 8 / 5; border-bottom: 1px solid var(--line); }
+.unit .ph img { width: 100%; height: 100%; object-fit: cover; }
+.unit-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.unit h3 { font-size: 1.05rem; }
+.unit h3 small { display: block; font: 500 0.78rem var(--font-body); color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+.plate { position: relative; background: var(--tint); border: 1.5px solid var(--blue); border-radius: 6px; padding: 14px 14px 12px; margin-top: 4px; flex: 1; }
+.plate::before { content: ""; position: absolute; left: 14px; top: -5px; width: 34%; height: 8px; background: var(--blue); border-radius: 2px; }
+.plate::after { content: ""; position: absolute; right: -6px; top: -6px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+.cap { font-size: 0.78rem; color: var(--muted); }
+.cap b { display: block; font: 700 1.35rem var(--font-display); color: var(--blue); line-height: 1.15; }
+.spec { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 12px 0 0; font-size: 0.92rem; }
+.spec div { display: block; min-width: 0; }
+.spec dt { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.spec dd { margin: 0; font-weight: 700; white-space: nowrap; }
+
+/* Alur */
+.flow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; counter-reset: s; list-style: none; padding: 0; margin: 0; }
+.flow li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; counter-increment: s; font-weight: 500; position: relative; min-width: 0; }
+.flow li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: var(--blue-fg); font: 700 0.85rem var(--font-body); margin-bottom: 10px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+.panel h3 { font-size: 1.1rem; margin-bottom: 12px; }
+.sop { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.sop li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.sop li:last-child { border-bottom: 0; padding-bottom: 0; }
+.sop b { color: var(--blue); }
+.sop span { color: var(--muted); font-size: 0.95rem; }
+.region { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.region span { background: var(--tint); border-radius: 8px; padding: 8px 16px; font-weight: 700; }
+.panel p.note { color: var(--muted); font-size: 0.95rem; }
+
+/* Dokumentasi */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.gallery figure { margin: 0; min-width: 0; }
+.gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
+.gallery figcaption { margin-top: 8px; font-size: 0.88rem; color: var(--muted); }
+.clients { display: flex; flex-wrap: wrap; gap: 10px; }
+.clients span { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; font-size: 0.92rem; }
+
+/* Pesan */
+.order { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: start; }
+.field + .field { margin-top: 14px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.row2 .field + .field { margin-top: 0; }
+label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+label i { font-style: normal; color: var(--muted); font-weight: 400; }
+input, select, textarea { width: 100%; font: 400 1rem var(--font-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px; min-height: 46px; }
+.preview { background: var(--bg); border: 1px dashed var(--line); border-radius: 8px; padding: 14px; font: 400 0.88rem/1.55 var(--font-body); white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: var(--muted); }
+.hint { color: var(--muted); font-size: 0.88rem; margin-top: 12px; }
+.stack { display: grid; gap: 10px; margin-top: 16px; }
+.mascot { margin-top: 20px; }
+.mascot img { border-radius: 12px; border: 1px solid var(--line); }
+
+/* Legalitas + kontak */
+.legal { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.legal div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+.legal dt { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+.legal dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.legal dd small { display: block; font-weight: 400; color: var(--muted); font-size: 0.84rem; margin-top: 2px; }
+.contact { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.contact h3 { font: 700 0.78rem var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.contact p { overflow-wrap: anywhere; }
+.copy { margin-top: 8px; background: transparent; border: 1px solid var(--line); border-radius: 6px; color: var(--fg); font: 500 0.82rem var(--font-body); padding: 4px 10px; cursor: pointer; }
+footer { margin-top: 48px; padding-block: 24px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+/* Bar WhatsApp (HP) */
+.bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.bar .btn { width: 100%; }
+
+@media (max-width: 1000px) {
+  .fleet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .legal, .contact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .hero, .about, .two, .order { grid-template-columns: 1fr; gap: 24px; }
+  .hero { padding-block: 28px 28px; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(2) { border-right: 0; }
+  .facts div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav a:not(.btn) { display: none; }
+  .sop li { grid-template-columns: 1fr; gap: 2px; }
+  .bar { display: block; }
+  body { padding-block: 0 84px; }
+}
+@media (max-width: 520px) {
+  .fleet { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row2 { grid-template-columns: 1fr; }
+  .legal, .contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Alzeara Majestic Cargo">
+      <span class="mono" aria-hidden="true">AMC</span>
+      <span><b>Alzeara Majestic Cargo</b><small>Solusi pengiriman cepat dan aman</small></span>
+    </a>
+    <nav class="nav" aria-label="Menu utama">
+      <a href="#tentang">Tentang</a>
+      <a href="#armada">Armada</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#legalitas">Legalitas</a>
+      <a href="#kontak">Kontak</a>
+      <a class="btn btn-primary btn-sm" href="#pesan">Pesan armada</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="top">
+    <div>
+      <p class="eyebrow">Jasa sewa kendaraan angkut · Bandung</p>
+      <h1>Sewa armada angkut barang, dari pickup <span>sampai tronton.</span></h1>
+      <p class="lead">CV Alzeara Majestic Cargo melayani sewa kendaraan angkut untuk individu dan perusahaan, dengan armada terawat dan sopir berpengalaman. Pilih armada, isi rute, lalu kirim permintaan lewat WhatsApp.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#pesan">Pesan armada</a>
+        <a class="btn btn-ghost" href="#armada">Lihat armada</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/hero.jpg" alt="Maskot kelinci Alzeara Majestic Cargo di depan gudang dan deretan truk box" width="1200" height="800">
+    </div>
+  </div>
+
+  <div class="facts">
+    <div><b class="num">8 jenis</b><span>armada tersedia</span></div>
+    <div><b class="num">500 kg – 15 ton</b><span>kapasitas angkut</span></div>
+    <div><b class="num">5 wilayah</b><span>Sumatra sampai Lombok</span></div>
+    <div><b>Bandung</b><span>basis operasional</span></div>
+  </div>
+
+  <section id="tentang">
+    <div class="sec-head"><h2>Tentang perusahaan</h2></div>
+    <div class="about">
+      <div>
+        <p>CV Alzeara Majestic Cargo bergerak di bidang jasa transportasi dan pengiriman barang dari Bandung. Kami menyediakan armada yang terawat dan aman untuk berbagai kebutuhan angkut, baik bagi individu maupun perusahaan.</p>
+        <p>Keamanan, ketepatan, dan kepuasan pelanggan menjadi pegangan kami dalam setiap pengiriman.</p>
+        <div class="vm">
+          <div><h3>Visi</h3><p>Menjadi perusahaan penyedia layanan sewa kendaraan angkut barang yang terpercaya, profesional, dan berdaya saing, serta mitra utama dalam kebutuhan transportasi barang di Indonesia.</p></div>
+          <div><h3>Misi</h3><p>Menghadirkan layanan yang aman, andal, dan sesuai kebutuhan pelanggan, didukung armada terawat, SDM kompeten, sistem operasional efisien, serta hubungan kerja sama yang berkelanjutan berdasarkan kepercayaan, integritas, dan profesionalisme.</p></div>
+        </div>
+        <div class="pills" aria-label="Alasan memilih kami">
+          <span>Kepuasan Pelanggan</span><span>Legalitas Resmi</span><span>Keandalan Utama</span><span>Efisiensi Biaya</span>
+        </div>
+      </div>
+      <figure>
+        <img src="img/mascot-office.jpg" alt="Maskot kelinci Alzeara Majestic Cargo sedang merencanakan pengiriman di kantor" width="700" height="700">
+      </figure>
+    </div>
+  </section>
+
+  <section id="armada">
+    <div class="sec-head">
+      <h2>Armada kami</h2>
+      <p>Delapan jenis armada dengan kapasitas dari 500 kg sampai 15 ton. Tekan "Pilih armada ini" untuk mengisinya otomatis di formulir pemesanan.</p>
+    </div>
+    <div class="fleet" id="fleet"></div>
+  </section>
+
+  <section id="layanan">
+    <div class="sec-head">
+      <h2>Alur layanan pengiriman</h2>
+      <p>Dari pesanan masuk sampai barang diterima di lokasi tujuan.</p>
+    </div>
+    <ol class="flow">
+      <li>Penerimaan pesanan</li>
+      <li>Verifikasi</li>
+      <li>Penentuan armada</li>
+      <li>Pemuatan barang</li>
+      <li>Pengangkutan darat</li>
+      <li>Serah terima di lokasi</li>
+    </ol>
+    <div class="two">
+      <div class="panel">
+        <h3>Standar operasional pengangkutan</h3>
+        <ul class="sop">
+          <li><b>Pemeriksaan muatan</b><span>Memastikan kondisi barang aman sebelum dimuat ke dalam armada.</span></li>
+          <li><b>Keamanan pengikatan</b><span>Mengamankan barang di dalam kendaraan sesuai prosedur keselamatan angkutan darat.</span></li>
+          <li><b>Pemeriksaan dokumen</b><span>Verifikasi surat jalan dan kelengkapan dokumen pengiriman sebelum berangkat.</span></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Jangkauan pengiriman</h3>
+        <div class="region"><span>Sumatra</span><span>Kalimantan</span><span>Jawa</span><span>Bali</span><span>Lombok</span></div>
+        <p class="note">Pengiriman antar pulau memakai jalur laut. Hubungi kami lewat WhatsApp untuk menanyakan rute dan ketersediaan armada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="lapangan">
+    <div class="sec-head"><h2>Dokumentasi lapangan</h2></div>
+    <div class="gallery">
+      <figure><img src="img/lapangan-1.jpg" alt="Pemuatan muatan berbungkus plastik biru ke truk dengan forklift" loading="lazy"><figcaption>Pemuatan dengan forklift</figcaption></figure>
+      <figure><img src="img/lapangan-2.jpg" alt="Truk trailer membawa muatan besi scaffolding" loading="lazy"><figcaption>Muatan material konstruksi</figcaption></figure>
+      <figure><img src="img/lapangan-3.jpg" alt="Dua orang menata dus di dalam bak truk" loading="lazy"><figcaption>Penataan muatan dus</figcaption></figure>
+      <figure><img src="img/driver.jpg" alt="Sopir perempuan berseragam biru mengemudikan truk di jalan tol" loading="lazy"><figcaption>Sopir dalam perjalanan</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="pelanggan">
+    <div class="sec-head">
+      <h2>Pelanggan dan mitra</h2>
+      <p>Beberapa perusahaan yang sudah memercayakan kebutuhan transportasi dan logistik mereka kepada kami.</p>
+    </div>
+    <div class="clients">
+      <span>PT KWD Purified Colour Board</span><span>Huacheng Building Materials</span><span>PT Ling Wei Gong Cheng Jianzhu Maoyi</span><span>PT Dekorasi Asia Jaya</span><span>PT Andalan Daya Abadi</span><span>Liusen</span><span>Tiger Water Solutions</span><span>PT Prefab Modular Construction Indonesia</span>
+    </div>
+  </section>
+
+  <section id="pesan">
+    <div class="sec-head">
+      <h2>Pesan armada</h2>
+      <p>Isi rute dan kebutuhan Anda. Tombol di bawah membuka WhatsApp dengan pesan yang sudah tertulis, tinggal dikirim ke tim kami. Harga dikonfirmasi lewat chat sesuai rute dan muatan.</p>
+    </div>
+    <div class="order">
+      <form class="panel" id="orderForm" autocomplete="off">
+        <h3>Detail pengiriman</h3>
+        <div class="field"><label for="f-armada">Armada</label><select id="f-armada"></select></div>
+        <div class="row2">
+          <div class="field"><label for="f-asal">Kota asal muat</label><input id="f-asal" type="text" placeholder="Contoh: Bandung"></div>
+          <div class="field"><label for="f-tujuan">Kota tujuan</label><input id="f-tujuan" type="text" placeholder="Contoh: Surabaya"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="f-tanggal">Tanggal muat <i>(opsional)</i></label><input id="f-tanggal" type="date"></div>
+          <div class="field"><label for="f-unit">Jumlah unit</label><input id="f-unit" type="number" min="1" max="50" value="1" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="f-muatan">Jenis muatan <i>(opsional)</i></label><input id="f-muatan" type="text" placeholder="Contoh: karton, besi, furnitur"></div>
+          <div class="field"><label for="f-berat">Perkiraan berat <i>(opsional)</i></label><input id="f-berat" type="text" placeholder="Contoh: 3 ton"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="f-nama">Nama</label><input id="f-nama" type="text" autocomplete="name" placeholder="Nama atau perusahaan"></div>
+          <div class="field"><label for="f-catatan">Catatan <i>(opsional)</i></label><input id="f-catatan" type="text" placeholder="Contoh: butuh tenaga bongkar muat"></div>
+        </div>
+      </form>
+      <div>
+        <div class="panel">
+          <h3>Pratinjau pesan WhatsApp</h3>
+          <pre class="preview" id="preview" aria-live="polite"></pre>
+          <div class="stack">
+            <a class="btn btn-wa" id="waBtn" href="#pesan" target="_blank" rel="noopener" aria-disabled="true">Kirim lewat WhatsApp</a>
+            <button class="btn btn-ghost" id="copyMsg" type="button">Salin teks pesan</button>
+          </div>
+          <p class="hint" id="hint"></p>
+        </div>
+        <div class="mascot"><img src="img/mascot-box.jpg" alt="Maskot kelinci Alzeara Majestic Cargo membawa kardus pindahan" width="700" height="700"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="legalitas">
+    <div class="sec-head"><h2>Legalitas perusahaan</h2></div>
+    <dl class="legal">
+      <div><dt>Bentuk usaha</dt><dd>CV Alzeara Majestic Cargo<small>Direktur: Sulastri Oktaviani</small></dd></div>
+      <div><dt>Akta pendirian</dt><dd class="num">No. 01<small>Notaris Afriyandi, S.H., M.Kn.</small></dd></div>
+      <div><dt>Nomor Induk Berusaha (NIB)</dt><dd class="num">1407260086059</dd></div>
+      <div><dt>NPWP</dt><dd class="num">1000 0000 1032 8904</dd></div>
+    </dl>
+  </section>
+
+  <section id="kontak">
+    <div class="sec-head"><h2>Hubungi kami</h2></div>
+    <div class="contact">
+      <div><h3>WhatsApp</h3><p class="num" id="waShow"></p><button class="copy" type="button" data-copy="+62 852 8692 0503">Salin nomor</button></div>
+      <div><h3>Email</h3><p>alzearamajesticcargo@gmail.com</p><button class="copy" type="button" data-copy="alzearamajesticcargo@gmail.com">Salin email</button></div>
+      <div><h3>Instagram</h3><p><a href="https://www.instagram.com/alzearamajesticcargo_official" target="_blank" rel="noopener">@alzearamajesticcargo_official</a></p></div>
+      <div><h3>Alamat kantor</h3><p>Kampung Juntihilir RT 002/RW 001, Sangkanhurip, Katapang, Kab. Bandung, Jawa Barat 40971</p></div>
+    </div>
+  </section>
+
+  <footer>© 2026 CV Alzeara Majestic Cargo. Semua hak dilindungi.</footer>
+</div>
+
+<div class="bar">
+  <a class="btn btn-wa" id="barWa" href="#pesan" target="_blank" rel="noopener">Tanya armada lewat WhatsApp</a>
+</div>
+
+<script>
+var COMPANY = "Alzeara Majestic Cargo";
+var WA_NUMBER = "6285286920503";
+var FLEET = [
+  { id: "pickup",  name: "Pickup",    variant: "Bak | Box", cap: "1 Ton",  vol: "4 cbm",   p: "2,2 m", l: "1,6 m", t: "1,3 m", img: "img/pickup.jpg" },
+  { id: "van",     name: "Blind Van", variant: "Tertutup",  cap: "500 Kg", vol: "3–4 cbm", p: "2,2 m", l: "1,3 m", t: "1,3 m", img: "img/blind-van.jpg" },
+  { id: "cde",     name: "CDE",       variant: "Bak | Box", cap: "2 Ton",  vol: "7 cbm",   p: "3 m",   l: "1,6 m", t: "1,3 m", img: "img/cde.jpg" },
+  { id: "cdd",     name: "CDD",       variant: "Bak | Box", cap: "4 Ton",  vol: "18 cbm",  p: "4,2 m", l: "1,9 m", t: "1,7 m", img: "img/cdd.jpg" },
+  { id: "cddlong", name: "CDD",       variant: "Long Box",  cap: "5 Ton",  vol: "24 cbm",  p: "5,5 m", l: "2 m",   t: "2,2 m", img: "img/cdd-long.jpg" },
+  { id: "fuso",    name: "Fuso",      variant: "Bak | Box", cap: "8 Ton",  vol: "33 cbm",  p: "6,3 m", l: "2,3 m", t: "2,2 m", img: "img/fuso.jpg" },
+  { id: "tronton", name: "Tronton",   variant: "Bak | Box", cap: "15 Ton", vol: "45 cbm",  p: "9 m",   l: "2,3 m", t: "2,5 m", img: "img/tronton.jpg" },
+  { id: "wingbox", name: "Wingbox",   variant: "Buka samping", cap: "15 Ton", vol: "45 cbm", p: "9 m", l: "2,3 m", t: "2,5 m", img: "img/wingbox.jpg" }
+];
+
+function $(id) { return document.getElementById(id); }
+function label(u) { return u.name + " " + u.variant; }
+
+$("waShow").textContent = "+62 852 8692 0503";
+$("barWa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent("Halo " + COMPANY + ", saya mau tanya ketersediaan armada.");
+
+var fleetEl = $("fleet"), sel = $("f-armada");
+FLEET.forEach(function (u) {
+  var el = document.createElement("article");
+  el.className = "unit";
+  el.innerHTML =
+    '<div class="ph"><img src="' + u.img + '" alt="' + label(u) + '" loading="lazy"></div>' +
+    '<div class="unit-body">' +
+      '<h3>' + u.name + '<small>' + u.variant + '</small></h3>' +
+      '<div class="plate">' +
+        '<div class="cap">Kapasitas berat maks.<b class="num">' + u.cap + '</b></div>' +
+        '<dl class="spec num">' +
+          '<div><dt>Volume</dt><dd>' + u.vol + '</dd></div>' +
+          '<div><dt>Lebar</dt><dd>' + u.l + '</dd></div>' +
+          '<div><dt>Panjang</dt><dd>' + u.p + '</dd></div>' +
+          '<div><dt>Tinggi</dt><dd>' + u.t + '</dd></div>' +
+        '</dl>' +
+      '</div>' +
+      '<button class="btn btn-ghost btn-sm" type="button" data-pick="' + u.id + '">Pilih armada ini</button>' +
+    '</div>';
+  fleetEl.appendChild(el);
+  var o = document.createElement("option");
+  o.value = u.id;
+  o.textContent = label(u) + " · " + u.cap;
+  sel.appendChild(o);
+});
+
+fleetEl.addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-pick]");
+  if (!b) return;
+  sel.value = b.getAttribute("data-pick");
+  update();
+  $("pesan").scrollIntoView();
+  $("f-asal").focus({ preventScroll: true });
+});
+
+function fmtDate(v) {
+  if (!v) return "";
+  var d = new Date(v + "T00:00:00");
+  if (isNaN(d.getTime())) return v;
+  return d.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function val(id) { return $(id).value.trim(); }
+
+function build() {
+  var u = FLEET.filter(function (x) { return x.id === sel.value; })[0] || FLEET[0];
+  var unit = Math.max(1, parseInt($("f-unit").value, 10) || 1);
+  var L = ["Halo " + COMPANY + ", saya ingin sewa armada.", ""];
+  L.push("Armada: " + label(u) + " (" + u.cap + ") x " + unit + " unit");
+  L.push("Asal muat: " + (val("f-asal") || "-"));
+  L.push("Tujuan: " + (val("f-tujuan") || "-"));
+  if (val("f-tanggal")) L.push("Tanggal muat: " + fmtDate(val("f-tanggal")));
+  if (val("f-muatan")) L.push("Jenis muatan: " + val("f-muatan"));
+  if (val("f-berat")) L.push("Perkiraan berat: " + val("f-berat"));
+  L.push("Nama: " + (val("f-nama") || "-"));
+  if (val("f-catatan")) L.push("Catatan: " + val("f-catatan"));
+  L.push("", "Mohon info ketersediaan dan estimasi biayanya. Terima kasih.");
+  return L.join("\n");
+}
+
+function update() {
+  var missing = [];
+  if (!val("f-asal")) missing.push("kota asal");
+  if (!val("f-tujuan")) missing.push("kota tujuan");
+  if (!val("f-nama")) missing.push("nama");
+  var msg = build();
+  $("preview").textContent = msg;
+  var btn = $("waBtn");
+  if (missing.length) {
+    btn.href = "#pesan";
+    btn.setAttribute("aria-disabled", "true");
+    $("hint").textContent = "Lengkapi dulu: " + missing.join(", ") + ".";
+  } else {
+    btn.href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+    btn.setAttribute("aria-disabled", "false");
+    $("hint").textContent = "WhatsApp akan terbuka di tab baru. Tekan kirim di sana untuk menyampaikan pesanan.";
+  }
+}
+
+$("waBtn").addEventListener("click", function (e) {
+  if (this.getAttribute("aria-disabled") === "true") e.preventDefault();
+});
+$("orderForm").addEventListener("submit", function (e) { e.preventDefault(); });
+$("orderForm").addEventListener("input", update);
+$("orderForm").addEventListener("change", update);
+
+function selectNode(node) {
+  try {
+    var r = document.createRange(); r.selectNodeContents(node);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  } catch (err) {}
+}
+function copyText(text, btn, node) {
+  var old = btn.textContent;
+  function done(ok) {
+    btn.textContent = ok ? "Tersalin" : "Tekan lama untuk menyalin";
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  }
+  try {
+    navigator.clipboard.writeText(text).then(function () { done(true); }, function () { if (node) selectNode(node); done(false); });
+  } catch (err) { if (node) selectNode(node); done(false); }
+}
+$("copyMsg").addEventListener("click", function () { copyText($("preview").textContent, this, $("preview")); });
+document.querySelectorAll(".copy").forEach(function (b) {
+  b.addEventListener("click", function () { copyText(b.getAttribute("data-copy"), b, b.previousElementSibling); });
+});
+
+update();
+</script>
+
+</body></html>
